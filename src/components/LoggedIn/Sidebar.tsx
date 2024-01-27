@@ -11,6 +11,7 @@ import {
   ExpensesIcon,
   InboxIcon,
   PayableIcon,
+  ReceiveablesIcon,
   ReportsIcon,
 } from "./Svgs/Svgs";
 
@@ -36,6 +37,11 @@ const Sidebar = ({ openMobileNav }: Props) => {
       title: "Inbox",
       icon: <InboxIcon />,
       route: "/inbox",
+    },
+    {
+      title: "Receiveables",
+      icon: <ReceiveablesIcon />,
+      route: "/receiveables",
     },
     {
       title: "Payables",
@@ -107,18 +113,21 @@ const Sidebar = ({ openMobileNav }: Props) => {
                         }
                       }}
                     >
-                      <span className="text-primary bg-primary rounded-full">{item.icon}</span>
+                      <span className="text-primary bg-primary rounded-full">
+                        {item.icon}
+                      </span>
+                      <div className="flex items-center justify-between w-full">
+                        <div>{item.title}</div>
 
-                      <div>{item.title}</div>
-
-                      <BiChevronDown
-                        className={`arrow-down ${
-                          showChildren === item.title
-                            ? "rotate-180 transition-all duration-300"
-                            : ""
-                        }`}
-                        size={18}
-                      />
+                        <BiChevronDown
+                          className={`arrow-down ${
+                            showChildren === item.title
+                              ? "rotate-180 transition-all duration-300"
+                              : ""
+                          }`}
+                          size={18}
+                        />
+                      </div>
                     </div>
 
                     {showChildren === item.title &&
