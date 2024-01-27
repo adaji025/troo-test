@@ -1,175 +1,185 @@
-import { Avatar, Text, LoadingOverlay } from "@mantine/core";
-import { useLocation, useNavigate } from "react-router-dom";
-import { FaRegUser } from "react-icons/fa";
-import { BiLogOut } from "react-icons/bi";
-import { DashboardIcon, GlobeIcon } from "../Svgs";
-import { PiUserBold } from "react-icons/pi";
-import useNotification from "../../hooks/useNotification";
-import GoHighLevel from "../../assets/svgs/high-level-dark.svg";
-import { useEffect, useState, Fragment } from "react";
-import { getUser } from "../../services/user";
-import { UserTypes } from "../../types/user";
+import { LoadingOverlay } from "@mantine/core";
+import { NavLink, useLocation } from "react-router-dom";
+import { BiChevronDown, BiLogOut } from "react-icons/bi";
+import { useState, Fragment } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import ConfirmLogout from "./ConfirmLogout";
+import LogoMark from "../../assets/svgs/PROJECT-X.svg";
+import {
+  ConfigurationIcon,
+  DashboardIcon,
+  ExpensesIcon,
+  InboxIcon,
+  PayableIcon,
+  ReportsIcon,
+} from "./Svgs/Svgs";
 
 type Props = {
   openMobileNav?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Sidebar = ({ openMobileNav }: Props) => {
-  const [users, setUsers] = useState<UserTypes | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [routes, setRoutes] = useState<any[]>([]);
+  const [loading] = useState(false);
+  const [showChildren, setShowChildren] = useState<string>("");
   const [opened, { open, close }] = useDisclosure(false);
 
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const { handleError } = useNotification();
-
-  useEffect(() => {
-    users?.is_admin ? setRoutes(adminRoutes) : setRoutes(usersRoutes);
-  }, [users]);
-
-  const usersRoutes = [
+  const routes = [
     {
-      title: "Dashboard",
+      title: "Overview",
       icon: <DashboardIcon />,
-      route: "/dashboard",
+      route: "/overview",
     },
     {
-      title: "Profile Page",
-      icon: <FaRegUser />,
-      route: "/profile",
+      title: "Inbox",
+      icon: <InboxIcon />,
+      route: "/inbox",
     },
     {
-      title: "Manage Environments",
-      icon: <GlobeIcon />,
-      route: "/manage-environment",
+      title: "Payables",
+      icon: <PayableIcon />,
+      route: "/payables",
+      key: ["bills", "approvals", "payment-out"],
+      children: [
+        {
+          title: "Bills",
+          route: "bills",
+        },
+        {
+          title: "Approvals",
+          route: "approvals",
+        },
+        {
+          title: "Payment out",
+          route: "payment-out",
+        },
+        {
+          title: "Procurements",
+          route: "procurements",
+        },
+      ],
+    },
+    {
+      title: "Reports",
+      icon: <ReportsIcon />,
+      route: "/reports",
+    },
+    {
+      title: "Configuration",
+      icon: <ConfigurationIcon />,
+      route: "/configuration",
+    },
+    {
+      title: "Expenses",
+      icon: <ExpensesIcon />,
+      route: "/expenses",
     },
   ];
-  const adminRoutes = [
-    {
-      title: "Dashboard",
-      icon: <DashboardIcon />,
-      route: "/dashboard",
-    },
-    {
-      title: "User management",
-      icon: <PiUserBold />,
-      route: "/manage-user",
-    },
-    {
-      title: "Profile Page",
-      icon: <FaRegUser />,
-      route: "/profile",
-    },
-    {
-      title: "Manage Environments",
-      icon: <GlobeIcon />,
-      route: "/manage-environment",
-    },
-  ];
-
-  useEffect(() => {
-    handleGetUser();
-  }, []);
-
-  const handleGetUser = () => {
-    setLoading(true);
-
-    getUser()
-      .then((res: any) => {
-        setUsers(res.data);
-      })
-      .catch((err) => {
-        handleError(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
 
   return (
     <Fragment>
       <ConfirmLogout close={close} opened={opened} />
       <LoadingOverlay visible={loading} />
-      <aside className="sidebar flex w-full h-full flex-col justify-between">
+      <aside className="flex w-full h-full flex-col px-[22px] lg:border-r">
         <div className="w-full">
-          <img src={GoHighLevel} alt="" />
+          <img src={LogoMark} alt="" className="mt-8" />
 
-          <div className="mt-14 grid gap-5 text-sm sm:text-base">
-            {routes.map((route: any, index: number) => (
-              <div
-                key={index}
-                className={`flex cursor-pointer gap-3  items-center px-3 py-2  rounded-lg ${
-                  location.pathname === route.route
-                    ? "bg-white text-darkBlue"
-                    : "text-white"
-                }`}
-                onClick={() => {
-                  navigate(route.route);
-                  openMobileNav && openMobileNav(false);
-                }}
-              >
-                <div
-                  className={`${
-                    location.pathname === route.route && "text-highLevelRed"
-                  }`}
-                >
-                  {route.icon}
-                </div>
-                <div className="font-semibold">{route.title}</div>
-              </div>
+          <div className="grid gap-5 text-sm sm:text-base mt-8">
+            {routes.map((item: any) => (
+              <Fragment key={item.title}>
+                {item.children ? (
+                  <>
+                    <div
+                      className={`flex gap-2 items-center transition-all duration-300 cursor-pointer ${
+                        item.key.includes(location.pathname.split("/")[1]) &&
+                        showChildren !== item.title
+                          ? "bg-primary text-white rounded-full p-2 font-bold"
+                          : ""
+                      }`}
+                      key={item.title}
+                      onClick={() => {
+                        if (showChildren === item.title) {
+                          setShowChildren("");
+                        } else {
+                          setShowChildren(item.title);
+                        }
+                      }}
+                    >
+                      <span className="text-primary bg-primary rounded-full">{item.icon}</span>
+
+                      <div>{item.title}</div>
+
+                      <BiChevronDown
+                        className={`arrow-down ${
+                          showChildren === item.title
+                            ? "rotate-180 transition-all duration-300"
+                            : ""
+                        }`}
+                        size={18}
+                      />
+                    </div>
+
+                    {showChildren === item.title &&
+                      item.children.map((child: any) => (
+                        <NavLink
+                          key={child.title}
+                          className={({ isActive }) =>
+                            [
+                              "pl-5 text-sm",
+                              isActive
+                                ? "bg-primary text-white rounded-full py-2 font-bold"
+                                : null,
+                            ]
+                              .filter(Boolean)
+                              .join(" ")
+                          }
+                          onClick={() => openMobileNav && openMobileNav(false)}
+                          to={child.route}
+                        >
+                          <div>{child.title}</div>
+                        </NavLink>
+                      ))}
+                  </>
+                ) : (
+                  <NavLink
+                    key={item.title}
+                    className={({ isActive }) =>
+                      [
+                        "flex gap-2 items-center",
+
+                        isActive ||
+                        (item.route === "/dashboard" &&
+                          location.pathname === "/")
+                          ? "rounded-full font-bold bg-primary text-white p-2"
+                          : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" ")
+                    }
+                    onClick={() => openMobileNav && openMobileNav(false)}
+                    to={item.route}
+                  >
+                    <span>{item.icon}</span>
+                    <div>{item.title}</div>
+                  </NavLink>
+                )}
+              </Fragment>
             ))}
           </div>
         </div>
 
-        <div className="mt-5 grid gap-5 text-sm sm:text-base">
-          {/* <div
-          className={`flex gap-3 cursor-pointer w-full text-white items-center px-3 py-2  rounded-lg ${
-            location.pathname === "/settings" && "bg-[#00D8D8]"
-          }`}
-          onClick={() => {
-            navigate("/settings");
-            openMobileNav && openMobileNav(false);
-          }}
-        >
-          <FiSettings size={24} />
-          <div className="font-semibold">Settings</div>
-        </div>
         <div
-          className={`flex gap-3 cursor-pointer w-full text-white items-center px-3 py-2  rounded-lg ${
-            location.pathname === "/support" && "bg-[#00D8D8]"
-          }`}
-          onClick={() => {
-            navigate("/support");
-            openMobileNav && openMobileNav(false);
-          }}
+          className="flex gap-2 items-center pt-3 text-white cursor-pointer"
+          onClick={open}
         >
-          <SupportIcon />
-          <div className="font-semibold">Support</div>
-        </div> */}
-
-          <div className="flex items-center justify-between border-t w-full pt-3">
-            <div className="flex gap-2">
-              <Avatar color="cyan" radius="xl">
-                MK
-              </Avatar>
-              <div className="text-white text-xs sm:text-sm">
-                <Text fw={600}>
-                  {users?.first_name} {users?.last_name}
-                </Text>
-                <Text>{users?.email}</Text>
-              </div>
-            </div>
-            <BiLogOut
-              size={30}
-              color="white"
-              className="rotate-180 cursor-pointer"
-              onClick={open}
-            />
-          </div>
+          <BiLogOut
+            size={18}
+            color="white"
+            className="rotate-180 cursor-pointer"
+          />
+          <div>Logout</div>
         </div>
       </aside>
     </Fragment>

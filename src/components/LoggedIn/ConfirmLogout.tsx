@@ -1,5 +1,4 @@
 import { Modal, Button, Divider, Text } from "@mantine/core";
-import useNotification from "../../hooks/useNotification";
 
 type Props = {
   opened: boolean;
@@ -7,8 +6,7 @@ type Props = {
 };
 
 const ConfirmLogout = ({ close, opened }: Props) => {
-  const { logoutUser } = useNotification();
-
+const logoutUser = () => {}
   return (
     <Modal centered opened={opened} onClose={close} title={<Text fw={900}>Log Out</Text>}>
       <Divider mb={16} />
