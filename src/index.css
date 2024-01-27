@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 body {
-    color: #748684;
+  color: #748684;
+}
+
+thead {
+  font-weight: 500 !important;
 }
