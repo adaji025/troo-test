@@ -2,7 +2,7 @@
 const Procurements = () => {
     return (
       <div>
-        <div className="text-black font-bold text-xl">Procurements</div>
+        <div className="text-black font-medium text-xl md:text-[28px]">Procurements</div>
       </div>
     )
   }

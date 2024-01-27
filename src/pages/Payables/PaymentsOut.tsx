@@ -2,7 +2,7 @@
 const PaymentsOuts = () => {
     return (
       <div>
-        <div className="text-black font-bold text-xl">Payments Outs</div>
+        <div className="text-black font-medium text-xl md:text-[28px]">Payments Outs</div>
       </div>
     )
   }

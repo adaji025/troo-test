@@ -2,7 +2,7 @@
 const Receiveables = () => {
     return (
       <div>
-        <div className="text-black font-bold text-xl">Receiveables</div>
+        <div className="text-black font-medium text-xl md:text-[28px]">Receiveables</div>
       </div>
     )
   }
