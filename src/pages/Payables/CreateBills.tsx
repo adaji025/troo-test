@@ -1,4 +1,6 @@
-import { Divider, Select, TextInput } from "@mantine/core";
+import { useState } from "react";
+import { Divider, Select, TextInput, LoadingOverlay } from "@mantine/core";
+import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -13,6 +15,7 @@ import { Upload } from "./components/Upload";
 
 const CreateBills = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
   const form = useForm({
     initialValues: {
       datapoints: [
@@ -36,6 +39,7 @@ const CreateBills = () => {
       ],
     },
   });
+
   const options = [
     {
       label: "Robert Michael",
@@ -50,6 +54,17 @@ const CreateBills = () => {
       value: "John Doe",
     },
   ];
+
+  const handleSave = () => { 
+    setLoading(true)
+    setTimeout(() => {
+      notifications.show({
+        title: 'Success',
+        message: 'Bills created successfully! 🤥',
+      })
+      setLoading(false)
+    }, 3000)
+  }
 
   const ProductDetails = form.values.datapoints.map((item, index) => (
     <div className="relative">
@@ -143,9 +158,11 @@ const CreateBills = () => {
   ));
   return (
     <div>
+      <LoadingOverlay visible={loading} />
       <div className="flex justify-between">
         <FaArrowLeft size={24} onClick={() => navigate(-1)} />
-        <button className="flex items-center gap-2 text-white bg-primary px-6 justify-center max-w-[164px] rounded-full py-2 text-sm font-medium">
+        <button className="flex items-center gap-2 text-white bg-primary px-6 justify-center max-w-[164px] rounded-full py-2 text-sm font-medium"
+        onClick={handleSave}>
           Save
         </button>
       </div>
@@ -178,7 +195,7 @@ const CreateBills = () => {
 
         {ProductDetails}
         <div
-          className="text-primary mt-5 mx-auto text-base flex items-center gap-2 cursor-pointer font-medium"
+          className="text-primary mt-5 mx-auto text-base inline-flex items-center gap-2 cursor-pointer font-medium"
           onClick={() => {
             form.insertListItem("datapoints", {
               desc: "",
@@ -200,7 +217,7 @@ const CreateBills = () => {
 
         {ApprovalData}
         <div
-          className="text-primary mt-5 mx-auto text-base flex items-center gap-2 cursor-pointer font-medium"
+          className="text-primary mt-5 mx-auto text-base inline-flex items-center gap-2 cursor-pointer font-medium"
           onClick={() => {
             form.insertListItem("approval", {
               desc: "",

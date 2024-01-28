@@ -1,11 +1,27 @@
+import { useState, Fragment } from "react";
+import { LoadingOverlay } from "@mantine/core";
 import Logo from "../../assets/svgs/PROJECT-X.svg";
 import Xicon from "../../assets/svgs/close.svg";
 import { Input } from "../../components/ui/input";
 import { PasswordInput } from "../../components/ui/PasswordInput";
 import { Button } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const handleLogin = () => {
+    setLoading(true)
+    setTimeout(() => {
+      localStorage.setItem("troo_token", "token")
+      setLoading(false)
+      navigate("/overview")
+    }, 5000)
+  }
   return (
+    <Fragment>
+      <LoadingOverlay visible={loading} />
     <div className="flex h-screen w-full justify-center items-center bg-gray-200">
       <div className="relative max-w-[517px] w-full mx-auto text-center bg-white p-10 flex flex-col justify-center items-center">
         <img src={Logo} alt="Project X" />
@@ -26,7 +42,8 @@ const Login = () => {
           <div className="flex justify-end text-xs font-medium mt-2 cursor-pointer text-primary">
             Forgot Password?
           </div>
-          <Button className="bg-primary w-full rounded-full mt-8">
+          <Button className="bg-primary w-full rounded-full mt-8"
+          onClick={handleLogin}>
             Sign in
           </Button>
           <div className="text-center text-xs font-medium mt-5 cursor-pointer text-primary">
@@ -34,7 +51,8 @@ const Login = () => {
           </div>
         </form>
       </div>
-    </div>
+      </div>
+    </Fragment>
   );
 };
 

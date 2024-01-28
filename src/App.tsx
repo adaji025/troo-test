@@ -1,10 +1,19 @@
-import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
-import { Route, Routes } from "react-router-dom";
+import { Notifications } from "@mantine/notifications";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 import LoggedInContainer from "./components/LoggedIn";
+import "@mantine/core/styles.css";
 
 export default function App() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  
+  const token = localStorage.getItem("troo_token");
+
+  if (token && location.pathname === "/") {
+    navigate("/overview")
+  }
   return (
     <MantineProvider
       theme={{
@@ -13,9 +22,9 @@ export default function App() {
         defaultRadius: 8,
       }}
     >
+      <Notifications position="top-right" />
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/*" element={<LoggedInContainer />} />
+        <Route path="/*" element={token ? <LoggedInContainer /> : <Login />} />
       </Routes>
     </MantineProvider>
   );

@@ -1,6 +1,7 @@
-import { LoadingOverlay } from "@mantine/core";
+import { LoadingOverlay, Divider, Avatar } from "@mantine/core";
 import { NavLink, useLocation } from "react-router-dom";
 import { BiChevronDown, BiLogOut } from "react-icons/bi";
+import { IoChevronDownOutline, IoSettingsOutline } from "react-icons/io5";
 import { useState, Fragment } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import ConfirmLogout from "./ConfirmLogout";
@@ -88,10 +89,9 @@ const Sidebar = ({ openMobileNav }: Props) => {
     <Fragment>
       <ConfirmLogout close={close} opened={opened} />
       <LoadingOverlay visible={loading} />
-      <aside className="flex w-full h-full flex-col px-[22px] lg:border-r">
+      <aside className="flex w-full h-full flex-col justify-between px-[22px] lg:border-r">
         <div className="w-full">
           <img src={LogoMark} alt="" className="mt-8" />
-
           <div className="grid gap-5 text-sm sm:text-base mt-8">
             {routes.map((item: any) => (
               <Fragment key={item.title}>
@@ -179,16 +179,41 @@ const Sidebar = ({ openMobileNav }: Props) => {
           </div>
         </div>
 
-        <div
-          className="flex gap-2 items-center pt-3 text-white cursor-pointer"
-          onClick={open}
-        >
-          <BiLogOut
-            size={18}
-            color="white"
-            className="rotate-180 cursor-pointer"
-          />
-          <div>Logout</div>
+        <div>
+          <div
+            className="flex gap-2 items-center py-3  cursor-pointer"
+            onClick={open}
+          >
+            <IoSettingsOutline
+              size={18}
+              color=""
+              className="rotate-180 cursor-pointer"
+            />
+            <div>Settings</div>
+          </div>
+          <div
+            className="flex gap-2 items-center py-3  cursor-pointer"
+            onClick={open}
+          >
+            <BiLogOut
+              size={18}
+              color=""
+              className="rotate-180 cursor-pointer"
+            />
+            <div>Logout</div>
+          </div>
+
+          <Divider my={16} />
+          <div className="flex justify-between items-center mb-3">
+            <div className="flex items-center gap-2">
+              <Avatar src="avatar.png" alt="it's me" />
+              <div>
+                <h2 className="font-medium text-sm text-secondary">Michael Michael</h2>
+                <div className="text-sm">Administrator</div>
+              </div>
+            </div>
+            <IoChevronDownOutline />
+          </div>
         </div>
       </aside>
     </Fragment>
