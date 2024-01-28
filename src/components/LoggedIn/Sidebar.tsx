@@ -47,7 +47,7 @@ const Sidebar = ({ openMobileNav }: Props) => {
       title: "Payables",
       icon: <PayableIcon />,
       route: "/payables",
-      key: ["bills", "approvals", "payment-out"],
+      key: ["bills", "approvals", "payment-out", "create-bills"],
       children: [
         {
           title: "Bills",

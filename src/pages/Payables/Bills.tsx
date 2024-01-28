@@ -6,6 +6,7 @@ import PaidIcon from "../../assets/svgs/bills/total-icon.svg";
 import UnpaidIcon from "../../assets/svgs/bills/total-icon.svg";
 import { MdFilterList } from "react-icons/md";
 import BillsSummaryTable from "./components/BillsSummaryTable";
+import { useNavigate } from "react-router-dom";
 
 const analytics = [
   {
@@ -25,13 +26,17 @@ const analytics = [
   },
 ];
 const Bills = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="flex justify-between">
         <div className="text-black font-medium text-xl md:text-[28px]">
           Bills
         </div>
-        <button className="flex items-center gap-2 text-white bg-primary px-6 justify-center max-w-[164px] rounded-full py-2 text-sm font-medium">
+        <button
+          className="flex items-center gap-2 text-white bg-primary px-6 justify-center max-w-[164px] rounded-full py-2 text-sm font-medium"
+          onClick={() => navigate("/create-bills")}
+        >
           <FaPlus />
           <div>Create bill</div>
           <FaChevronDown size={10} />

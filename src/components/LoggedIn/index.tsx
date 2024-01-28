@@ -13,6 +13,7 @@ import Reports from "../../pages/Reports/Reports";
 import Configurations from "../../pages/Configurations/Configuration";
 import Expenses from "../../pages/Expenses/Expenses";
 import Receiveables from "../../pages/Receiveables/Receiveable";
+import CreateBills from "../../pages/Payables/CreateBills";
 
 const LoggedInContainer = () => {
   const [mobileNav, openMobileNav] = useState(false);
@@ -38,6 +39,7 @@ const LoggedInContainer = () => {
               <Route path="/configuration" element={<Configurations />} />
               <Route path="/expenses" element={<Expenses />} />
               <Route path="/receiveables" element={<Receiveables />} />
+              <Route path="/create-bills" element={<CreateBills />} />
             </Routes>
           </main>
         </div>

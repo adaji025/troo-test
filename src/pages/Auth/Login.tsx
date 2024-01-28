@@ -1,11 +1,10 @@
-import { useRef } from "react";
 import Logo from "../../assets/svgs/PROJECT-X.svg";
 import Xicon from "../../assets/svgs/close.svg";
 import { Input } from "../../components/ui/input";
 import { PasswordInput } from "../../components/ui/PasswordInput";
 import { Button } from "@mantine/core";
+
 const Login = () => {
-  const inputRef = useRef(null);
   return (
     <div className="flex h-screen w-full justify-center items-center bg-gray-200">
       <div className="relative max-w-[517px] w-full mx-auto text-center bg-white p-10 flex flex-col justify-center items-center">
@@ -19,7 +18,6 @@ const Login = () => {
           <Input
             className="w-full"
             placeholder="Business Email"
-            ref={inputRef}
           />
           <PasswordInput
             className="w-full mt-6"
