@@ -49,13 +49,13 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
         {seePw ? (
           <FaRegEyeSlash
             color="#025C56"
-            className="absolute top-2.5 right-3"
+            className="absolute top-3 right-3"
             onClick={() => setSeePw(!seePw)}
           />
         ) : (
           <FaRegEye
             color="#025C56"
-            className="absolute top-2.5 right-3"
+            className="absolute top-3 right-3"
             onClick={() => setSeePw(!seePw)}
           />
         )}
