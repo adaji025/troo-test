@@ -61,6 +61,7 @@ const CreateBills = () => {
       notifications.show({
         title: 'Success',
         message: 'Bills created successfully! 🤥',
+        color: "green"
       })
       setLoading(false)
     }, 3000)

@@ -89,7 +89,7 @@ const Sidebar = ({ openMobileNav }: Props) => {
     <Fragment>
       <ConfirmLogout close={close} opened={opened} />
       <LoadingOverlay visible={loading} />
-      <aside className="flex w-full h-full flex-col justify-between px-[22px] lg:border-r">
+      <aside className="flex min-h-screen flex-col justify-between px-[22px] lg:border-r w-[250px]">
         <div className="w-full">
           <img src={LogoMark} alt="" className="mt-8" />
           <div className="grid gap-5 text-sm sm:text-base mt-8">
@@ -181,7 +181,7 @@ const Sidebar = ({ openMobileNav }: Props) => {
 
         <div>
           <div
-            className="flex gap-2 items-center py-3  cursor-pointer"
+            className="flex gap-2 items-center mt-6  cursor-pointer"
             onClick={open}
           >
             <IoSettingsOutline
@@ -192,7 +192,7 @@ const Sidebar = ({ openMobileNav }: Props) => {
             <div>Settings</div>
           </div>
           <div
-            className="flex gap-2 items-center py-3  cursor-pointer"
+            className="mt-4 flex gap-2 items-center cursor-pointer"
             onClick={open}
           >
             <BiLogOut

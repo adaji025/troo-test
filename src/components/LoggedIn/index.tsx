@@ -21,13 +21,13 @@ const LoggedInContainer = () => {
   return (
     <Fragment>
       <MobileSidebar mobileNav={mobileNav} openMobileNav={openMobileNav} />
-      <div className="flex overflow-x-hidden">
-        <div className="fixed h-screen hidden lg:flex lg:w-[250px]  bg-darkBlue">
+      <div className="flex w-full items-start">
+        <div className="sticky top-0 hidden lg:flex">
           <Sidebar />
         </div>
         <div className="w-full">
           <Header mobileNav={mobileNav} openMobileNav={openMobileNav} />
-          <main className="w-full bg-white pt-5 lg:pt-[32px] lg:ml-[250px] lg:w-[calc(100vw-250px)] px-4 lg:px-10 mb-10 mt-[80px] lg:mt-[unset]">
+          <main className="w-full bg-white pt-5 lg:pt-[32px] px-4 lg:px-10 mb-10 mt-[80px] lg:mt-[unset]">
             <Routes>
               <Route path="/overview" element={<Overview />} />
               <Route path="/inbox" element={<Inbox />} />
