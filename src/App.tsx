@@ -8,7 +8,7 @@ export default function App() {
   return (
     <MantineProvider
       theme={{
-        primaryColor: "blue",
+        primaryColor: "green",
         fontFamily: "Inter, sans-serif",
         defaultRadius: 8,
       }}

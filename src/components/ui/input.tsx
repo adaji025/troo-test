@@ -1,5 +1,4 @@
 import * as React from "react";
-import { FaRegEye } from "react-icons/fa";
 import { cn } from "../../lib/utils";
 
 export interface InputProps
