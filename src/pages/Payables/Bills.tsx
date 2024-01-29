@@ -1,30 +1,13 @@
 import { FaPlus } from "react-icons/fa6";
 import { FaChevronDown } from "react-icons/fa";
 import AnalyticsCard from "./components/AnalyticsCard";
-import Totalcon from "../../assets/svgs/bills/total-icon.svg";
-import PaidIcon from "../../assets/svgs/bills/total-icon.svg";
-import UnpaidIcon from "../../assets/svgs/bills/total-icon.svg";
+
 import { MdFilterList } from "react-icons/md";
 import BillsSummaryTable from "./components/BillsSummaryTable";
 import { useNavigate } from "react-router-dom";
+import { analytics } from "../../constant";
 
-const analytics = [
-  {
-    title: "Total",
-    icon: Totalcon,
-    amount: "1,824,456",
-  },
-  {
-    title: "Paid bills",
-    icon: PaidIcon,
-    amount: "1,824,456",
-  },
-  {
-    title: "Unpaid bills",
-    icon: UnpaidIcon,
-    amount: "1,824,456",
-  },
-];
+
 const Bills = () => {
   const navigate = useNavigate();
   return (

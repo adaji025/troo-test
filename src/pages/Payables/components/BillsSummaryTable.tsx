@@ -1,84 +1,11 @@
 import { Table } from "@mantine/core";
 import { useState } from "react";
 import { SlOptionsVertical } from "react-icons/sl";
-
-const billsSummary = [
-  {
-    id: 1,
-    billNumber: "B-623-4534",
-    supplier: "Robert McBrown",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-  {
-    id: 2,
-    billNumber: "B-623-4534",
-    supplier: "Big Kahuna Burger Ltd.",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-  {
-    id: 3,
-    billNumber: "B-623-4534",
-    supplier: "Biffco Enterprises Ltd.",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-  {
-    id: 4,
-    billNumber: "B-623-4534",
-    supplier: "Binford Ltd.",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-  {
-    id: 5,
-    billNumber: "B-623-4534",
-    supplier: "Robert & Sons",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-  {
-    id: 6,
-    billNumber: "B-623-4534",
-    supplier: "Acme Co.",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-  {
-    id: 7,
-    billNumber: "B-623-4534",
-    supplier: "Robert McBrown",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-  {
-    id: 8,
-    billNumber: "B-623-4534",
-    supplier: "Barone LLC.",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-  {
-    id: 9,
-    billNumber: "B-623-4534",
-    supplier: "Robert McBrown",
-    dateIssued: "05/05/23",
-    dueDate: "10/10/23",
-    amount: "₦15245.66",
-  },
-];
+import { billsSummary } from "../../../constant";
 
 const BillsSummaryTable = () => {
   const [selectedRowIds, setSelectedRowIds] = useState<number[]>([]);
+
   const isAllRowsSelected =
     billsSummary?.length > 0 && selectedRowIds.length === billsSummary.length;
 
